@@ -10,8 +10,8 @@ int main () {
 
     //variables
     string userIn;
-    string userFile = CSC450_CT5_mod5.txt;
-    string reverseUserFile = CSC450_CT5_mod5_reverse.txt; 
+    string userFile;
+    string reverseUserFile; 
 
     //gets userIn
     cout << "Enter text to be appended in the file: ";
@@ -29,11 +29,12 @@ int main () {
 
     //read and reverses content
     ifstream inFile("CSC450_CT5_mod5.txt");
+    string content; // Define content to store the reversed lines
     if (inFile.is_open()) {
         string line;
         while (getline(inFile, line)) {
             reverse(line.begin(), line.end());
-            outFile << line << endl;
+            content += line + "\n"; // Append reversed line to content
         }
         inFile.close();
     } else {
@@ -41,6 +42,16 @@ int main () {
         return 1;
     }
 
+    //writes reversed content to new file
+    ofstream outFileReverse("CSC450_CT5_mod5_reverse.txt");
+    if (outFileReverse.is_open()) {
+        outFileReverse << content;
+        outFileReverse.close();
+    } else {
+        cout << "Error opening file for writing.\n";
+        return 1;
+    }
+    cout << "Reversed content written to CSC450_CT5_mod5_reverse.txt\n";
 return 0;
 }
 
